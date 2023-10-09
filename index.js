@@ -6,6 +6,7 @@ import cors from 'cors';
 import tennis_reserve from './models/tennisModel.js';
 import coachList from "./models/staffModel.js";
 import txdata from "./models/txactModel.js";
+
 const app = express();
 const port = 3000;
 const corsOptions = {
@@ -63,6 +64,17 @@ app.get("/tennisCourt/:court/:day",async (req,res)=>{
       return;
   }
 });
+
+app.get("/coachList",async (req,res)=>{
+  try {
+    const data = await coachList.find({});
+    console.log(data.toString());
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(500).json({message: error.message});
+  }
+});
+
 app.get("/coachList/:type",async (req,res)=>{
     try {
       const _type = req.params.type;
