@@ -5,6 +5,7 @@ import morgan from "morgan";
 import cors from 'cors';
 import tennis_reserve from './models/tennisModel.js';
 import coachList from "./models/staffModel.js";
+import txdata from "./models/txactModel.js";
 const app = express();
 const port = 3000;
 const corsOptions = {
@@ -12,8 +13,9 @@ const corsOptions = {
   credentials: true,
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json()); // for parsing application/json
+app.use(json());
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(express.static("public"));
 app.use(helmet());
@@ -61,7 +63,6 @@ app.get("/tennisCourt/:court/:day",async (req,res)=>{
       return;
   }
 });
-
 app.get("/coachList/:type",async (req,res)=>{
     try {
       const _type = req.params.type;
@@ -72,8 +73,6 @@ app.get("/coachList/:type",async (req,res)=>{
       return res.status(500).json({message: error.message});
     }
 });
-
-
 app.get("/coachList/:type/:stime",async (req,res)=>{
     try {
       const _type = req.params.type;
@@ -86,6 +85,38 @@ app.get("/coachList/:type/:stime",async (req,res)=>{
       return res.status(500).json({message: error.message});
     }
 });
+app.post("/activity", async(req,res)=>{
+  try {
+    const data = req.body
+    console.log(data);
+    /*process of booking 
+      1. create data at TX
+      2. update isbooking court
+      3. update isbooking coach
+    */
+    // create data at TX
+    const tx = await txdata.create(data);
+    // update court status
+    courtBooking(data.location,data.time,true);
+    return res.status(200).json(tx);
+  } catch (error) {
+    return res.status(500).json({message: error.message});
+  }
+})
+
+
+function courtBooking(court,time,status){
+    console.log(court,time,status);
+    if(status === true){
+      const courtUpdate = async (court,time,status)=>{
+        await tennis_reserve.findOneAndUpdate({courtNumber:court,},{});
+      }
+    }else{
+
+    }
+    
+  
+}
 
 
 
