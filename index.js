@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from 'cors';
-import tennis_reserve from './models/tennisModel.js';
+import tennisCourt from './models/tennisModel.js';
 import coachList from "./models/staffModel.js";
 import txdata from "./models/txactModel.js";
 const app = express();
@@ -21,46 +21,51 @@ app.use(express.static("public"));
 app.use(helmet());
 app.use(morgan("dev"));
 
+app.get("/friend", async (req,res)=>{
 
+})
 
 app.get("/",async (req,res)=>{
     res.status(200).json("Hi i am back end,Nodejs ,what do you want");
 });
+
 app.get("/tennisCourt",async (req,res)=>{
   try {
-      const data = await tennis_reserve.find({});
-      // console.log("getCourt:",data.toString());
-      res.status(200).json(data);
+      const today = new Date(Date.now());
+      const today_form = today.toISOString().slice(0, 10); //2023-10-09
+      // console.log(today_form);
+      const data = await tennisCourt.find({date:today_form});
+      const _court = data[0].court;
+      res.status(200).json(_court);
       return;
   } catch (error) {
       res.status(500).json({message: error.message});
   }
 });
-app.get("/tennisCourt/:court/:day",async (req,res)=>{
+app.get("/tennisCourt/:court/:date",async (req,res)=>{
   try {
-      const court = req.params.court;
-      const day = req.params.day;
-      let field = "";
-      // console.log(court,day);
-      if(day == "today"){
-        field = "slots_today";
-        const data = await tennis_reserve.find({courtNumber:parseInt(court)},field);
-        const time = data[0].slots_today;
-        // console.log(time);
-        res.status(200).json(time);
-        return;
+      const _court = req.params.court;
+      const date = req.params.date;
+      // console.log(_court,date);
+      if(date){
+        // console.log(_court);
+        // thank god and holy thing,for it working.
+        const data = await tennisCourt.find({date:date},{court:{$elemMatch:{courtNumber:_court}}});
+        console.log(data);
+        if(data.length > 0){
+          const time = data[0].court[0].slots;
+          // console.log(time);
+          return res.status(200).json(time);
+        }else{
+          return res.status(200).json([]);
+        }
       }else{
-        field = "slots_tomr";
-        const data = await tennis_reserve.find({courtNumber:parseInt(court)},field);
-        const time = data[0].slots_tomr;
-        // console.log(time);
-        res.status(200).json(time);
-        return;
+        return console.log("date is false");
       }
       // const times = await tennis_reserve.find();
   } catch (error) {
-      res.status(500).json({message: error.message});
-      return;
+    return res.status(500).json({message: error.message});
+      
   }
 });
 app.get("/coachList/:type",async (req,res)=>{
@@ -95,27 +100,48 @@ app.post("/activity", async(req,res)=>{
       3. update isbooking coach
     */
     // create data at TX
-    const tx = await txdata.create(data);
+    // const tx = await txdata.create(data);
     // update court status
-    courtBooking(data.location,data.time,true);
-    return res.status(200).json(tx);
+    // courtBooking(data.location,data.time,data.date,true);
+    console.log(data.location,data.time,data.date,true)
+    await tennisCourt.findOneAndUpdate(
+      {
+        date: data.date,
+        "court.courtNumber": data.location,
+        "court.slots.startTime": data.time
+      },
+      { 
+        "court.$[].slots.$[slot].isBooked": true 
+      },
+      (err, doc) => {
+        if (err) {
+          console.log('Something went wrong:', err);
+        } else {
+          console.log('Updated document:', doc);
+        }
+      }
+    );
+    return res.status(200).json("tx");
+
   } catch (error) {
     return res.status(500).json({message: error.message});
   }
 })
 
-
-function courtBooking(court,time,status){
-    console.log(court,time,status);
-    if(status === true){
-      const courtUpdate = async (court,time,status)=>{
-        await tennis_reserve.findOneAndUpdate({courtNumber:court,},{});
-      }
-    }else{
-
+function courtBooking(_court,_time,_date,_booking){
+  try {
+    console.log(_court,_time,_date);
+    const courtUpdate = async (_court,_time,_status)=>{
+      await tennisCourt.findOneAndUpdate({date:_date,'court.courtNumber':_court,'slots.startTime':_time},{'slots.isBooked':_booking});
     }
+    courtUpdate(_court,_time,_date);
+    return true;
+  } catch (error) {
+    console.log(error.message)
+    return false;
+  }
     
-  
+
 }
 
 

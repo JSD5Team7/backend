@@ -6,15 +6,15 @@ const tennisSchema = mongoose.Schema(
             type:Number,
             require:true
         },
-        slots_today:[{
-            startTime: String,
-            endTime: String,
-            isBooked: Boolean
-        }],
-        slots_tomr:[{
-            startTime: String,
-            endTime: String,
-            isBooked: Boolean
+        court:[{
+            courtNumber:{
+                type:Number
+            },
+            slots:[{
+                startTime: String,
+                endTime: String,
+                isBooked: Boolean
+            }]
         }]
     },
     {
