@@ -2,9 +2,8 @@ import mongoose from "mongoose";
 
 const tennisSchema = mongoose.Schema(
     {
-        courtName:{
-            type:Number,
-            require:true
+        date:{
+            type:String,
         },
         court:[{
             courtNumber:{

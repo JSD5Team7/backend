@@ -35,6 +35,7 @@ app.get("/tennisCourt",async (req,res)=>{
       const today_form = today.toISOString().slice(0, 10); //2023-10-09
       // console.log(today_form);
       const data = await tennisCourt.find({date:today_form});
+      console.log(data.toString());
       const _court = data[0].court;
       res.status(200).json(_court);
       return;
@@ -100,28 +101,32 @@ app.post("/activity", async(req,res)=>{
       3. update isbooking coach
     */
     // create data at TX
-    // const tx = await txdata.create(data);
+    const tx = await txdata.create(data);
     // update court status
     // courtBooking(data.location,data.time,data.date,true);
     console.log(data.location,data.time,data.date,true)
-    await tennisCourt.findOneAndUpdate(
+    await tennisCourt.updateOne(
       {
-        date: data.date,
-        "court.courtNumber": data.location,
-        "court.slots.startTime": data.time
-      },
+        date: data.date, 
+        "court.courtNumber": data.location, 
+        "court.slots.startTime": data.time 
+      }, 
       { 
-        "court.$[].slots.$[slot].isBooked": true 
+        $set: { "court.$[i].slots.$[j].isBooked": true }
+      },
+      {
+        arrayFilters: [ { "i.courtNumber": data.location }, { "j.startTime": data.time } ],
+        new: true 
       },
       (err, doc) => {
         if (err) {
-          console.log('Something went wrong:', err);
+          console.error('Error:', err);
         } else {
-          console.log('Updated document:', doc);
+          console.log('Updated Document:', doc);
         }
       }
     );
-    return res.status(200).json("tx");
+    return res.status(200).json(tx);
 
   } catch (error) {
     return res.status(500).json({message: error.message});
