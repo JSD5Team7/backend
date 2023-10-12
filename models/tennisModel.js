@@ -12,7 +12,8 @@ const tennisSchema = mongoose.Schema(
             slots:[{
                 startTime: String,
                 endTime: String,
-                isBooked: Boolean
+                isBooked: Boolean,
+                Booker:String
             }]
         }]
     },
