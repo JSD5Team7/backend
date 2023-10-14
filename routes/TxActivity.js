@@ -1,7 +1,7 @@
 import express, { json } from "express";
 import txdata from "../models/txactModel.js";
 import coachList from "../models/staffModel.js";
-import tennisCourt from '../models/tennisModel.js';
+import tennisDB from '../models/tennisModel.js';
 
 
 const Router = express.Router();
@@ -19,7 +19,7 @@ Router.post("/", async(req,res)=>{
       const tx = await txdata.create(data);
       // update court booking
       console.log(data.information.user_id,data.information.fname,data.location,data.time,data.date,true)
-      await tennisCourt.updateOne(
+      await tennisDB.updateOne(
         {
           date: data.date, 
           "court.courtNumber": data.location, 

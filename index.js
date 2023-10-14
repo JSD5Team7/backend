@@ -5,7 +5,12 @@ import morgan from "morgan";
 import cors from 'cors';
 import tennisRoute from "./routes/Tennis.js"
 import coachRoute from "./routes/Coach.js"
-import txAct from "./routes/TxActivity.js"
+import txActRoute from "./routes/TxActivity.js"
+import badmintonRoute from "./routes/Badminton.js"
+import yogaRoute from "./routes/yoga.js"
+import tabletennisRoute from "./routes/tabletennis.js"
+import aerobicRoute from "./routes/Aerobic.js"
+
 const app = express();
 const port = 3000;
 const corsOptions = {
@@ -22,7 +27,11 @@ app.use(helmet());
 app.use(morgan("dev"));
 app.use("/tennisCourt",tennisRoute);
 app.use("/coachList",coachRoute);
-app.use("/activity",txAct);
+app.use("/activity",txActRoute);
+app.use("/badmintonCourt",badmintonRoute);
+app.use("/yogaCourt",yogaRoute);
+app.use("/tabletennisCourt",tabletennisRoute);
+app.use("/aerobicCourt",aerobicRoute);
 
 app.get("/",async (req,res)=>{
     res.status(200).json("Hi i am back end,Nodejs and express,what do you want?");
