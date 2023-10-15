@@ -10,6 +10,7 @@ import badmintonRoute from "./routes/Badminton.js"
 import yogaRoute from "./routes/yoga.js"
 import tabletennisRoute from "./routes/tabletennis.js"
 import aerobicRoute from "./routes/Aerobic.js"
+import userRoute from "./routes/User.js"
 
 const app = express();
 const port = 3000;
@@ -32,6 +33,7 @@ app.use("/badmintonCourt",badmintonRoute);
 app.use("/yogaCourt",yogaRoute);
 app.use("/tabletennisCourt",tabletennisRoute);
 app.use("/aerobicCourt",aerobicRoute);
+app.use("/user",userRoute);
 
 app.get("/",async (req,res)=>{
     res.status(200).json("Hi i am back end,Nodejs and express,what do you want?");
