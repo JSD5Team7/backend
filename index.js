@@ -27,6 +27,9 @@ app.use(morgan("dev"));
 app.get("/",async (req,res)=>{
     res.status(200).json("Hi i am back end,Nodejs ,what do you want");
 });
+
+
+
 app.get("/tennisCourt",async (req,res)=>{
   try {
       const data = await tennis_reserve.find({});
@@ -37,6 +40,7 @@ app.get("/tennisCourt",async (req,res)=>{
       res.status(500).json({message: error.message});
   }
 });
+
 app.get("/tennisCourt/:court/:day",async (req,res)=>{
   try {
       const court = req.params.court;
@@ -84,6 +88,7 @@ app.get("/coachList/:type",async (req,res)=>{
       return res.status(500).json({message: error.message});
     }
 });
+
 app.get("/coachList/:type/:stime",async (req,res)=>{
     try {
       const _type = req.params.type;
@@ -96,6 +101,7 @@ app.get("/coachList/:type/:stime",async (req,res)=>{
       return res.status(500).json({message: error.message});
     }
 });
+
 app.post("/activity", async(req,res)=>{
   try {
     const data = req.body
