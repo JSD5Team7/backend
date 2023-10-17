@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const tennisSchema = mongoose.Schema(
+const babmintonSchema = mongoose.Schema(
     {
         date:{
             type:String,
@@ -22,5 +22,5 @@ const tennisSchema = mongoose.Schema(
     }
 )
 
-const tennisDB = mongoose.model("tennis_reserve",tennisSchema,"tennis_reserve");
-export default tennisDB;
+const badmintonDB = mongoose.model("reserve_badminton",babmintonSchema,"reserve_badminton");
+export default badmintonDB;
