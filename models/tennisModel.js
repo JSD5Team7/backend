@@ -2,19 +2,19 @@ import mongoose from "mongoose";
 
 const tennisSchema = mongoose.Schema(
     {
-        courtName:{
-            type:Number,
-            require:true
+        date:{
+            type:String,
         },
-        slots_today:[{
-            startTime: String,
-            endTime: String,
-            isBooked: Boolean
-        }],
-        slots_tomr:[{
-            startTime: String,
-            endTime: String,
-            isBooked: Boolean
+        court:[{
+            courtNumber:{
+                type:Number
+            },
+            slots:[{
+                startTime: String,
+                endTime: String,
+                isBooked: Boolean,
+                Booker:String
+            }]
         }]
     },
     {
@@ -22,5 +22,5 @@ const tennisSchema = mongoose.Schema(
     }
 )
 
-const tennisCourt = mongoose.model("tennis_reserve",tennisSchema,"tennis_reserve");
-export default tennisCourt;
+const tennisDB = mongoose.model("tennis_reserve",tennisSchema,"tennis_reserve");
+export default tennisDB;
