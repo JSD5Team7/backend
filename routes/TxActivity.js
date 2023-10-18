@@ -95,4 +95,13 @@ Router.post("/", async(req,res)=>{
   });
 
 
+  Router.post("/edit", async(req,res)=>{
+    try {
+      
+    } catch (error) {
+      return res.status(500).json({message: error.message});
+    }
+  });
+
+
   export default Router;
