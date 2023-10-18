@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from 'cors';
+// import dotenv from 'dotenv';
 
 import tennisRoute from "./routes/Tennis.js"
 import coachRoute from "./routes/Coach.js"
@@ -13,6 +14,7 @@ import tabletennisRoute from "./routes/tabletennis.js"
 import aerobicRoute from "./routes/Aerobic.js"
 import userRoute from "./routes/User.js"
 
+import UsersRoute from './routes/Users.js'
 
 const app = express();
 const port = 3000;
@@ -36,6 +38,8 @@ app.use("/yogaCourt",yogaRoute);
 app.use("/tabletennisCourt",tabletennisRoute);
 app.use("/aerobicCourt",aerobicRoute);
 app.use("/user",userRoute);
+
+app.use("/users", UsersRoute)
 
 app.get("/",async (req,res)=>{
     res.status(200).json("Hi i am back end,Nodejs and express,what do you want?");

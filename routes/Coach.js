@@ -4,6 +4,15 @@ import coachList from "../models/staffModel.js";
 const Router = express.Router();
 
 //prefix: coachList
+Router.get("/all",async (req,res)=>{
+  try {
+    const data = await coachList.find({});
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(500).json({message: error.message});
+  }
+});
+
 Router.get("/:type",async (req,res)=>{
     try {
       const _type = req.params.type;

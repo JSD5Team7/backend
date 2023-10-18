@@ -1,9 +1,20 @@
 import mongoose from "mongoose";
 
-const userSchema = mongoose.Schema(
+const userSchema = new mongoose.Schema(
     {
-        "user_id":{
+        "username": {
             type:String
+        },
+        "password": {
+            type:String
+        },
+        "role": {
+            type: String,
+            default: 'user'
+        },
+        "isActive": {
+            type: Boolean,
+            default: true
         },
         "fname":{
             type:String
@@ -18,9 +29,6 @@ const userSchema = mongoose.Schema(
             type:String
         },
         "phone":{
-            type:String
-        },
-        "desc":{
             type:String
         }
     },
