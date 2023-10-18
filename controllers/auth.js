@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt'
 import userDB from '../models/userModel.js';
 import jwt from 'jsonwebtoken'
-import { v4 as uuidv4 } from 'uuid';
 
 export async function register(req, res) {
     try {
@@ -26,7 +25,6 @@ export async function register(req, res) {
         const salt = await bcrypt.genSalt(12)
 
         user = new userDB({ 
-            user_id: uuidv4(),
             username, 
             password, 
             fname, 
