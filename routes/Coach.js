@@ -27,13 +27,27 @@ Router.get("/:type/:stime",async (req,res)=>{
     try {
       const _type = req.params.type;
       const _starttime = req.params.stime;
-      const data = await coachList.find({$and:[{type:_type},{slots_today:{$elemMatch:{startTime:_starttime,isBooked:false}}}]});
-      // console.log(data.toString());
+      const data = await coachList.find({$and:[{type:_type},{slots_today:{$elemMatch:{startTime:_starttime,isBooked:false}}} ]});
+      console.log(data);
       return res.status(200).json(data);
 
     } catch (error) {
       return res.status(500).json({message: error.message});
     }
+});
+
+Router.get("/:type/:stime/:whoid",async (req,res)=>{
+  try {
+    const _type = req.params.type;
+    const _starttime = req.params.stime;
+    const _whoid = req.params.whoid;
+    const data = await coachList.find( { $or:[{id:_whoid},{$and:[{type:_type},{slots_today:{$elemMatch:{startTime:_starttime,isBooked:false}}}]}]   });
+    console.log(data);
+    return res.status(200).json(data);
+
+  } catch (error) {
+    return res.status(500).json({message: error.message});
+  }
 });
 
 export default Router;

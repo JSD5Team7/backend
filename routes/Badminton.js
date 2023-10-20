@@ -8,7 +8,7 @@ Router.get("/:date",async (req,res)=>{
         const date = req.params.date;
         console.log(date);
         const data = await badmintonDB.find({date:date});
-        console.log(data.toString());
+        // console.log(data.toString());
         let _court = [];
         if(data.length > 0){
             _court = data[0].court;
