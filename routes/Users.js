@@ -1,7 +1,11 @@
 import express from 'express';
 const Router = express.Router();
-import { register, login }  from '../controllers/auth.js'
+import { register, login , currentUser, users , getUsers }  from '../controllers/usercontroller.js'
+import { auth } from '../middleware/auth.js'
 
+Router.get('/:_id', users)
+
+Router.get('/', getUsers)
 
 // ======================Register=======================
 
@@ -14,6 +18,10 @@ Router.post('/register', register);
 Router.post('/login', login);
 
 // ========================================================================
+
+Router.post('/current-user', auth, currentUser)
+
+
 
 Router.delete('/auth', async (req, res) => {
     try {

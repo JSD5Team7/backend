@@ -2,13 +2,37 @@ import bcrypt from 'bcrypt'
 import userDB from '../models/userModel.js';
 import jwt from 'jsonwebtoken'
 
+export async function users (req, res) {
+    try {
+        const user_id = req.params._id
+        console.log(user_id)
+        const userData = await userDB.findOne({_id: user_id}).select('-password').exec();
+        return res.status(200).json(userData);
+    } catch(err) {
+        console.log(err)
+        return res.status(500).send('User not found')
+    }
+}
+
+export async function getUsers(req, res) {
+    try {
+        const usersData = await userDB.find({}).select('-password').exec();
+        return res.status(200).json(usersData)
+    } catch(err) {
+        console.log(err)
+        return res.status(500).send('User not found')
+    }
+}
+
 export async function register(req, res) {
     try {
         const { 
             username, 
             password, 
             fname, 
-            lname, 
+            lname,
+            gender,
+            birthday,
             age, 
             email, 
             phone
@@ -28,7 +52,9 @@ export async function register(req, res) {
             username, 
             password, 
             fname, 
-            lname, 
+            lname,
+            gender,
+            birthday,
             age, 
             email, 
             phone
@@ -55,7 +81,9 @@ export async function login(req, res) {
         //Check User Active//
         if (user && user.isActive){
             //Check Password//
-            const isMatch = bcrypt.compare(password, user.password)
+            const isMatch = await bcrypt.compare(password, user.password)
+            console.log(password)
+            
 
             if (!isMatch) {
                 return res.status(400).send("Username or Password Invalid")
@@ -64,6 +92,7 @@ export async function login(req, res) {
                 user: {
                     userId: user._id ,
                     username: user.username,
+                    password: user.password,
                     role: user.role
                 }
             }
@@ -71,7 +100,7 @@ export async function login(req, res) {
             //Generate Token//
             jwt.sign(payload, 
                 'jwtSecret', 
-                {expiresIn: 3600}, 
+                {expiresIn: 60*60}, 
                 (err, token) => {
                     if(err) throw err;
                     res.json({token, payload})
@@ -84,6 +113,16 @@ export async function login(req, res) {
 
     } catch(err){
         console.log(err)
+        res.status(500).send('Server Error!')
+    }
+}
+
+export async function currentUser(req, res) {
+    try {
+        const user = await userDB.findOne({username: req.user.username})
+        .select('-password').exec()
+        res.send(user)
+    } catch(err) {
         res.status(500).send('Server Error!')
     }
 }

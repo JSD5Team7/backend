@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema(
     {
         "username": {
-            type:String
+            type:String,
         },
         "password": {
             type:String
@@ -16,10 +16,19 @@ const userSchema = new mongoose.Schema(
             type: Boolean,
             default: true
         },
+        "img": {
+            type:String,
+        },
         "fname":{
             type:String
         },
         "lname":{
+            type:String
+        },
+        "gender":{
+            type:String
+        },
+        "birthday":{
             type:String
         },
         "age":{
