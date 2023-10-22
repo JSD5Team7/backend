@@ -6,6 +6,7 @@ import badmintonDB from "../models/badmintonModel.js";
 import tabletennisDB from "../models/tabletennisModel.js";
 import yogaDB from "../models/yogaModel.js";
 import aerobicDB from "../models/aerobicModel.js";
+import staffScheduleModel from "../models/staffScheduleModel.js";
 import { ObjectId } from "mongodb";
 
 
@@ -191,73 +192,32 @@ const updateCourtSport = (sport,data,isupdate)=>{
     console.log(error)
   }
 }
-
-const updateCoachTomorrow = async(data)=>{
+const updateCoach = async (data)=>{
   try {
-    await coachList.updateOne(
+    console.log(data);
+    await staffScheduleModel.updateOne(
       {
-        id:data.coachId,
-        "slots_tomr.startTime":data.time
+        "date": data.date, 
+        "staff.id": data.coachId, 
+        "staff.slots.startTime": data.time
       },
       {
-        $set:{ "slots_tomr.$[i].isBooked":true }
+        "$set": { "staff.$[i].slots.$[j].isBooked": true }
       },
       {
-        arrayFilters:[{"i.startTime":data.time}],
-        new: true
-      },
-      (err, doc) => {
-        if (err) {
-          console.error('Error:', err);
-        } else {
-          console.log('Updated Document:', doc);
-        }
+        arrayFilters:[{"i.id":data.coachId},{"j.startTime":data.time}]
       }
-    );
+    ).then(result => console.log(result))
+    .catch(err => console.error(err));
   } catch (error) {
-    console.log(error);
-  }
-}
-const updateCoachToday = async(data)=>{
-  try {
-    await coachList.updateOne(
-      {
-        id:data.coachId,
-        "slots_today.startTime":data.time
-      },
-      {
-        $set:{ "slots_today.$[i].isBooked":true }
-      },
-      {
-        arrayFilters:[{"i.startTime":data.time}],
-        new: true
-      },
-      (err, doc) => {
-        if (err) {
-          console.error('Error:', err);
-        } else {
-          console.log('Updated Document:', doc);
-        }
-      }
-    );
-  } catch (error) {
-    console.log(error)
-  }
-}
-const updateCoach = (data)=>{
-  if(data.day == "btn_tow"){
-    //to tomorow
-    updateCoachTomorrow(data);
-  }else{
-    //today 
-    updateCoachToday(data);
+      console.log(error)
   }
 }
 const txsummit = async (req,res,next)=>{
   try {
       const data = req.body
       const sport = req.params.sport;
-      console.log(data,sport);
+      // console.log(data,sport);
       // 1.create data at TX
       const tx = createTxactivity(data);
       // 2.update court booking

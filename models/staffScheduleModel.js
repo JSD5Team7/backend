@@ -10,16 +10,11 @@ const coachSchSchema = mongoose.Schema(
                 id:{
                     type:Number
                 },
-                slots_today:[{
+                slots:[{
                     startTime: String,
                     endTime: String,
                     isBooked: Boolean
                 }],
-                slots_tomr:[{
-                    startTime: String,
-                    endTime: String,
-                    isBooked: Boolean
-                }]
             }
         ]
     }
