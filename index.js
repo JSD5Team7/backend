@@ -3,7 +3,10 @@ import mongoose from 'mongoose';
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from 'cors';
-// import dotenv from 'dotenv';
+
+import dotenv from 'dotenv';
+dotenv.config();
+const dbURI = process.env.DATABASE;
 
 import tennisRoute from "./routes/Tennis.js"
 import coachRoute from "./routes/Coach.js"
@@ -49,7 +52,7 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
   });
 
-mongoose.connect('mongodb+srv://suthanachot:clKXKIbLfUWd7Wnv@cluster0.spk7r49.mongodb.net/sportclubDB?retryWrites=true&w=majority')
+mongoose.connect(dbURI)
   .then(() => console.log('Connected!')).catch((error)=>{
     console.log(error);
   });

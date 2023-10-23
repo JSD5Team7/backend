@@ -2,10 +2,9 @@ import bcrypt from 'bcrypt'
 import userDB from '../models/userModel.js';
 import jwt from 'jsonwebtoken'
 
-export async function users (req, res) {
+export async function user (req, res) {
     try {
         const user_id = req.params._id
-        console.log(user_id)
         const userData = await userDB.findOne({_id: user_id}).select('-password').exec();
         return res.status(200).json(userData);
     } catch(err) {
@@ -127,3 +126,61 @@ export async function currentUser(req, res) {
     }
 }
 
+export async function userUpdate(req, res) {
+    const user_id = req.params._id
+    try {
+        const { 
+            fname, 
+            lname,
+            gender,
+            birthday,
+            age,
+            email, 
+            phone
+        } = req.body;
+        const emailValidate = await userDB.findOne({email})
+        if (emailValidate) {
+            res.status(400).send('Email already exists')
+        } else if (user_id){
+            const userData = await userDB.findOneAndUpdate(
+                {_id: user_id}, 
+                {
+                    fname: fname, 
+                    lname: lname,
+                    gender: gender,
+                    birthday: birthday,
+                    age: age, 
+                    email: email, 
+                    phone: phone
+                })
+                res.send(userData)
+        }
+        
+    } catch(err) {
+        res.status(500).send('User ID not found!')
+    }
+}
+
+
+//ต้องให้ใส่ Email เพื่อส่งลิ้งที่มี URL repassword/ ด้วย User_id 
+export async function resetPasswordUser(req, res) {
+    const user_id = req.params._id
+    try {
+        const { 
+            password
+        } = req.body;
+
+        const salt = await bcrypt.genSalt(12)
+        const enPassword = await bcrypt.hash(password,salt);
+
+        const userPassword = await userDB.findOneAndUpdate(
+            {_id: user_id}, 
+                {
+                    password: enPassword, 
+                })
+                res.send(userPassword)
+        
+    } catch(err) {
+        res.status(500).send('User ID not found!')
+    }
+}

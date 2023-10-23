@@ -1,9 +1,9 @@
 import express from 'express';
 const Router = express.Router();
-import { register, login , currentUser, users , getUsers }  from '../controllers/usercontroller.js'
+import { register, login , currentUser, user , getUsers , userUpdate, resetPasswordUser}  from '../controllers/usercontroller.js'
 import { auth } from '../middleware/auth.js'
 
-Router.get('/:_id', users)
+Router.get('/:_id', auth, user)
 
 Router.get('/', getUsers)
 
@@ -21,17 +21,9 @@ Router.post('/login', login);
 
 Router.post('/current-user', auth, currentUser)
 
+Router.put('/updateuser/:_id', auth, userUpdate );
 
-
-Router.delete('/auth', async (req, res) => {
-    try {
-        res.send('List Get User')
-
-    } catch(err){
-        console.log(err)
-        res.status(500).send('Register Error!')
-    }
-});
+Router.put('/resetpassword/:_id', resetPasswordUser );
 
 Router.delete('/auth', async (req, res) => {
     try {
