@@ -47,10 +47,22 @@ const coachAvaTime = async(req,res)=>{
 }
 const coachWhoOther = async(req,res)=>{
     try {
+        const _date = req.params.date;
         const _type = req.params.type;
         const _starttime = req.params.stime;
         const _whoid = req.params.whoid;
-        const data = await coachList.find( { $or:[{id:_whoid},{$and:[{type:_type},{slots_today:{$elemMatch:{startTime:_starttime,isBooked:false}}}]}]   });
+        console.log(_date,_type,_starttime,_whoid);
+        const data = await staffScheduleModel.aggregate([
+            { $match: { date: _date } },
+            { $unwind: "$staff" },
+            { $match: { "staff.type": _type} },
+            { $unwind: "$staff.slots" },
+            { $match: { 
+                "staff.slots.startTime": _starttime, 
+                "staff.slots.isBooked": false 
+            }},
+            { $replaceRoot: { newRoot: "$staff" }}
+        ]);
         console.log(data);
         return res.status(200).json(data);
     } catch (error) {

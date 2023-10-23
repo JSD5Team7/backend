@@ -192,9 +192,10 @@ const updateCourtSport = (sport,data,isupdate)=>{
     console.log(error)
   }
 }
-const updateCoach = async (data)=>{
+const updateCoach = async (data,isBooking)=>{
   try {
-    console.log(data);
+    console.log(data,isBooking);
+
     await staffScheduleModel.updateOne(
       {
         "date": data.date, 
@@ -202,7 +203,7 @@ const updateCoach = async (data)=>{
         "staff.slots.startTime": data.time
       },
       {
-        "$set": { "staff.$[i].slots.$[j].isBooked": true }
+        "$set": { "staff.$[i].slots.$[j].isBooked": isBooking }
       },
       {
         arrayFilters:[{"i.id":data.coachId},{"j.startTime":data.time}]
@@ -224,7 +225,7 @@ const txsummit = async (req,res,next)=>{
       console.log(data.information.user_id,data.information.fname,data.location,data.time,data.date,true)
       updateCourtSport(sport,data,true);
       //3.update coach booking
-      updateCoach(data);
+      updateCoach(data,true);
       return res.status(200).json(tx);
   } catch (error) {
     next(error);
@@ -262,17 +263,22 @@ const editTx = async(req,res)=>{
         const data = req.body;
         console.log(req.url);
         // console.log(data);//new
-        //1.update old court sport
+        //1.1.update old court sport
         const _tx_id = data.tx_id;
         const sport = data.type;
         console.log(_tx_id);
         const old_data = await getTx(_tx_id);
         console.log(old_data);
         updateCourtSport(sport,old_data,false)//data (old)befor edit
-        //2.updateCoach
+        //1.2.update old Coach
+        updateCoach(old_data,false);
+        //..........................
         //
-        //3.updateTx New
+        //2.1.updateTx New
         updateCourtSport(sport,data,true);
+        //2.2 update new coach
+        updateCoach(data,true);
+        //2.3 update new Tx_activity
         const targetDocumentId = {"_id":data.tx_id};
         const update = {
             "type":data.type,
@@ -310,5 +316,48 @@ const editTx = async(req,res)=>{
   }
 }
 
-export default {txsummit,editTx,findTx}
+const deleteTx = async(req,res)=>{
+  try {
+    const _tx_id = req.params.tx_id;
+    console.log("delete:Tx: " + _tx_id);
+    //0.get old data to use
+    const old_data = await getTx(_tx_id);
+    const sport = old_data.type;
+    //1.reset court//2.reset coach
+    updateCourtSport(sport,old_data,false)//data (old)befor edit
+    updateCoach(old_data,false);
+    //3.delete Tx_activity
+    await txdata.findByIdAndDelete(_tx_id).then(
+      (document)=>{
+        if(document){
+          console.log('Document Deleted:', document);
+          const message = {
+            "success":true,
+            "message":"delete successfully",
+            "data":{}
+          }
+          return res.status(200).json(message)
+        }else{
+          console.log('Document Not Found');
+          const message = {
+            "success":false,
+            "message":"Document Not Found",
+            "data":{}
+          }
+          return res.status(200).json(message)
+        }   
+      }
+    )
+  } catch (error) {
+
+    const message = {
+      "success":false,
+      "message":error.message,
+      "data":{}
+    }
+    return res.status(500).json(message);
+  }
+}
+
+export default {txsummit,editTx,findTx,deleteTx}
 

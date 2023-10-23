@@ -7,6 +7,6 @@ const Router = express.Router();
 Router.get("/all",Coach_controller.coachAll);
 Router.get("/:type",Coach_controller.coachType);
 Router.get("/coachAva/:type/:date/:stime",Coach_controller.coachAvaTime);
-Router.get("/:type/:stime/:whoid",Coach_controller.coachWhoOther);
+Router.get("/:type/:date/:stime/:whoid",Coach_controller.coachWhoOther);
 
 export default Router;
