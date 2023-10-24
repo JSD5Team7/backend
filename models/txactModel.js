@@ -1,14 +1,10 @@
 
-import { BSON } from "mongodb";
+import { BSON, ObjectId } from "mongodb";
 import mongoose from "mongoose";
 
 
 const txSchema = mongoose.Schema(
     {
-        "tx_id":{
-            type:String,
-            require:true
-        },
         "type":{
             type:String
         },
@@ -16,7 +12,7 @@ const txSchema = mongoose.Schema(
             type:String
         },
         "date":{
-            type:Date
+            type:String
         },
         "time":{
             type:String
@@ -27,11 +23,14 @@ const txSchema = mongoose.Schema(
         "coachName":{
             type:String
         },
+        "coachId":{
+            type:String
+        },
         "activity":{
             type:String
         },
         "information":{
-            user_id:Number,
+            user_id:String,
             fname:String,
             lname:String,
             phone:String,

@@ -48,14 +48,11 @@ export async function register(req, res) {
 export async function login(req, res) {
     try {
         const { username , password } = req.body;
-
         if (!username || !password)
         res.status(400).send('Username or Password requie')
         //Check Username//
         var user = await userDB.findOneAndUpdate({ username }, {new: true });
-
         //Check User Active//
-
         if (user && user.isActive){
             //Check Password//
             const isMatch = bcrypt.compare(password, user.password)

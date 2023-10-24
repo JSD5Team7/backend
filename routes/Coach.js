@@ -1,39 +1,12 @@
 import express, { json } from "express";
-import coachList from "../models/staffModel.js";
+import Coach_controller from "../controllers/Coach_controller.js";
 
 const Router = express.Router();
 
 //prefix: coachList
-Router.get("/all",async (req,res)=>{
-  try {
-    const data = await coachList.find({});
-    return res.status(200).json(data);
-  } catch (error) {
-    return res.status(500).json({message: error.message});
-  }
-});
-
-Router.get("/:type",async (req,res)=>{
-    try {
-      const _type = req.params.type;
-      const data = await coachList.find({type:_type});
-      // console.log(data.toString());
-      return res.status(200).json(data);
-    } catch (error) {
-      return res.status(500).json({message: error.message});
-    }
-});
-Router.get("/:type/:stime",async (req,res)=>{
-    try {
-      const _type = req.params.type;
-      const _starttime = req.params.stime;
-      const data = await coachList.find({$and:[{type:_type},{slots_today:{$elemMatch:{startTime:_starttime,isBooked:false}}}]});
-      // console.log(data.toString());
-      return res.status(200).json(data);
-
-    } catch (error) {
-      return res.status(500).json({message: error.message});
-    }
-});
+Router.get("/all",Coach_controller.coachAll);
+Router.get("/:type",Coach_controller.coachType);
+Router.get("/coachAva/:type/:date/:stime",Coach_controller.coachAvaTime);
+Router.get("/:type/:date/:stime/:whoid",Coach_controller.coachWhoOther);
 
 export default Router;
