@@ -1,6 +1,14 @@
 import bcrypt from 'bcrypt'
 import userDB from '../models/userModel.js';
 import jwt from 'jsonwebtoken'
+import cloudinary from 'cloudinary';
+// import { v2 as cloudinaryV2 } from 'cloudinary';
+          
+// cloudinary.config({ 
+//   cloud_name: 'dkjfuys7y', 
+//   api_key: '462648652258362', 
+//   api_secret: 'g8QYCcROCKBMqlapqfTDSvfx5zk' 
+// });
 
 export async function user (req, res) {
     try {
@@ -28,6 +36,7 @@ export async function register(req, res) {
         const { 
             username, 
             password, 
+            img,
             fname, 
             lname,
             gender,
@@ -49,7 +58,8 @@ export async function register(req, res) {
 
         user = new userDB({ 
             username, 
-            password, 
+            password,
+            img, 
             fname, 
             lname,
             gender,
@@ -59,6 +69,11 @@ export async function register(req, res) {
             phone
         });
 
+        // const cloudinaryResponse = await cloudinaryV2.uploader.upload(img.path, {
+        //     folder: 'GrootClub'
+        // });
+
+        // user.img = cloudinaryResponse.secure_url;
         user.password = await bcrypt.hash(password,salt);
         await user.save();
         res.send('Register Success');
@@ -138,10 +153,16 @@ export async function userUpdate(req, res) {
             email, 
             phone
         } = req.body;
-        const emailValidate = await userDB.findOne({email})
-        if (emailValidate) {
-            res.status(400).send('Email already exists')
-        } else if (user_id){
+        const userWithSameEmail = await userDB.findOne({
+            $and: [
+                { _id: { $ne: user_id } },
+                { email: email }
+            ]
+        });
+
+        if (userWithSameEmail) {
+            res.status(400).send('This email has already been used')
+        } else {
             const userData = await userDB.findOneAndUpdate(
                 {_id: user_id}, 
                 {
@@ -151,16 +172,15 @@ export async function userUpdate(req, res) {
                     birthday: birthday,
                     age: age, 
                     email: email, 
-                    phone: phone
+                     phone: phone
                 })
                 res.send(userData)
-        }
-        
+            }
+
     } catch(err) {
         res.status(500).send('User ID not found!')
     }
 }
-
 
 //ต้องให้ใส่ Email เพื่อส่งลิ้งที่มี URL repassword/ ด้วย User_id 
 export async function resetPasswordUser(req, res) {
