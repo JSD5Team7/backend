@@ -1,14 +1,6 @@
 import bcrypt from 'bcrypt'
 import userDB from '../models/userModel.js';
 import jwt from 'jsonwebtoken'
-import cloudinary from 'cloudinary';
-// import { v2 as cloudinaryV2 } from 'cloudinary';
-          
-// cloudinary.config({ 
-//   cloud_name: 'dkjfuys7y', 
-//   api_key: '462648652258362', 
-//   api_secret: 'g8QYCcROCKBMqlapqfTDSvfx5zk' 
-// });
 
 export async function user (req, res) {
     try {
@@ -69,15 +61,9 @@ export async function register(req, res) {
             phone
         });
 
-        // const cloudinaryResponse = await cloudinaryV2.uploader.upload(img.path, {
-        //     folder: 'GrootClub'
-        // });
-
-        // user.img = cloudinaryResponse.secure_url;
         user.password = await bcrypt.hash(password,salt);
         await user.save();
         res.send('Register Success');
-        
         
     } catch(err){
         console.log(err)
@@ -110,21 +96,18 @@ export async function login(req, res) {
                     role: user.role
                 }
             }
-    
+
             //Generate Token//
             jwt.sign(payload, 
                 'jwtSecret', 
-                {expiresIn: 60*60}, 
+                {expiresIn: 3600000}, 
                 (err, token) => {
                     if(err) throw err;
                     res.json({token, payload})
-                    
                 })
-
         } else {
             return res.status(400).send("Username or Password Invalid");
         }
-
     } catch(err){
         console.log(err)
         res.status(500).send('Server Error!')
@@ -143,8 +126,10 @@ export async function currentUser(req, res) {
 
 export async function userUpdate(req, res) {
     const user_id = req.params._id
+    
     try {
         const { 
+            img,
             fname, 
             lname,
             gender,
@@ -153,26 +138,27 @@ export async function userUpdate(req, res) {
             email, 
             phone
         } = req.body;
+
         const userWithSameEmail = await userDB.findOne({
             $and: [
                 { _id: { $ne: user_id } },
                 { email: email }
             ]
         });
-
         if (userWithSameEmail) {
             res.status(400).send('This email has already been used')
         } else {
             const userData = await userDB.findOneAndUpdate(
                 {_id: user_id}, 
                 {
+                    img: img,
                     fname: fname, 
                     lname: lname,
                     gender: gender,
                     birthday: birthday,
                     age: age, 
                     email: email, 
-                     phone: phone
+                    phone: phone
                 })
                 res.send(userData)
             }

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-export async function auth(req, res, next) {
+export async function authMiddleware(req, res, next) {
     try{
         const token = req.headers["authtoken"]
 
