@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema(
             default: true
         },
         "img": {
-            type:String,
+            type:String
         },
         "fname":{
             type:String
