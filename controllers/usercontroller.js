@@ -100,7 +100,7 @@ export async function login(req, res) {
             //Generate Token//
             jwt.sign(payload, 
                 'jwtSecret', 
-                {expiresIn: 60*60}, 
+                {expiresIn: 3600000}, 
                 (err, token) => {
                     if(err) throw err;
                     res.json({token, payload})
