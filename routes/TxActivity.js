@@ -17,4 +17,4 @@ Router.put("/edit", activityController.editTx);
 Router.delete("/deleteTx/:tx_id",activityController.deleteTx)
 
 
-  export default Router;
+export default Router;
