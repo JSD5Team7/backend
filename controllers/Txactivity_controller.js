@@ -45,7 +45,7 @@ const updateTennisBooking = async (data,isbooked,booker)=>{
     console.log(error);
   }
 }
-const updateBadmintonBooking = async(data)=>{
+const updateBadmintonBooking = async(data,isbooked,booker)=>{
   try {
     await badmintonDB.updateOne(
       {
@@ -54,7 +54,7 @@ const updateBadmintonBooking = async(data)=>{
         "court.slots.startTime": data.time 
       }, 
       { 
-        $set: { "court.$[i].slots.$[j].isBooked": true ,"court.$[i].slots.$[j].Booker":data.information.user_id}
+        $set: { "court.$[i].slots.$[j].isBooked": isbooked ,"court.$[i].slots.$[j].Booker":booker}
       },
       {
         arrayFilters: [ { "i.courtNumber": data.location }, { "j.startTime": data.time } ],
@@ -73,7 +73,7 @@ const updateBadmintonBooking = async(data)=>{
     console.log(error);
   }
 }
-const updateTabletennisBooking = async (data)=>{
+const updateTabletennisBooking = async (data,isbooked,booker)=>{
   try {
     await tabletennisDB.updateOne(
       {
@@ -82,7 +82,7 @@ const updateTabletennisBooking = async (data)=>{
         "court.slots.startTime": data.time 
       }, 
       { 
-        $set: { "court.$[i].slots.$[j].isBooked": true ,"court.$[i].slots.$[j].Booker":data.information.user_id}
+        $set: { "court.$[i].slots.$[j].isBooked": isbooked ,"court.$[i].slots.$[j].Booker":booker}
       },
       {
         arrayFilters: [ { "i.courtNumber": data.location }, { "j.startTime": data.time } ],
@@ -101,7 +101,7 @@ const updateTabletennisBooking = async (data)=>{
     console.log(error);
   }
 }
-const updateYogaBooking = async (data)=>{
+const updateYogaBooking = async (data,isbooked,booker)=>{
   try {
     await yogaDB.updateOne(
       {
@@ -110,7 +110,7 @@ const updateYogaBooking = async (data)=>{
         "court.slots.startTime": data.time 
       }, 
       { 
-        $set: { "court.$[i].slots.$[j].isBooked": true ,"court.$[i].slots.$[j].Booker":data.information.user_id}
+        $set: { "court.$[i].slots.$[j].isBooked": isbooked ,"court.$[i].slots.$[j].Booker":booker}
       },
       {
         arrayFilters: [ { "i.courtNumber": data.location }, { "j.startTime": data.time } ],
@@ -129,7 +129,7 @@ const updateYogaBooking = async (data)=>{
     console.log(error);
   }
 }
-const updateAerobicBooking = async (data)=>{
+const updateAerobicBooking = async (data,isbooked,booker)=>{
   try {
     await aerobicDB.updateOne(
       {
@@ -138,7 +138,7 @@ const updateAerobicBooking = async (data)=>{
         "court.slots.startTime": data.time 
       }, 
       { 
-        $set: { "court.$[i].slots.$[j].isBooked": true ,"court.$[i].slots.$[j].Booker":data.information.user_id}
+        $set: { "court.$[i].slots.$[j].isBooked": isbooked ,"court.$[i].slots.$[j].Booker":booker}
       },
       {
         arrayFilters: [ { "i.courtNumber": data.location }, { "j.startTime": data.time } ],
@@ -323,6 +323,7 @@ const deleteTx = async(req,res)=>{
     //0.get old data to use
     const old_data = await getTx(_tx_id);
     const sport = old_data.type;
+    console.log("delete sport:" + sport);
     //1.reset court//2.reset coach
     updateCourtSport(sport,old_data,false)//data (old)befor edit
     updateCoach(old_data,false);
