@@ -1,0 +1,945 @@
+[{
+  "date": "null",
+  "staff": [
+    {
+      "id": 1,
+      "name": "John",
+      "type": "tennis",
+      "image": "https://i.ibb.co/7kGMYGt/coachtennis1.png",
+      "des": "Professional tennis player with multiple championships.",
+      "slots": [
+        {
+          "startTime": "06:00",
+          "endTime": "07:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "07:00",
+          "endTime": "08:00",
+          "isBooked": true
+        },
+        {
+          "startTime": "08:00",
+          "endTime": "09:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "09:00",
+          "endTime": "10:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "13:00",
+          "endTime": "14:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "14:00",
+          "endTime": "15:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "22:00",
+          "endTime": "23:00",
+          "isBooked": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Alice",
+      "type": "badminton",
+      "image": "https://i.ibb.co/gzjXP94/coachtbadminton2.png",
+      "des": "Enjoys playing badminton in the local club.",
+      "slots": [
+        {
+          "startTime": "06:00",
+          "endTime": "07:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "07:00",
+          "endTime": "08:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "08:00",
+          "endTime": "09:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "09:00",
+          "endTime": "10:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "13:00",
+          "endTime": "14:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "14:00",
+          "endTime": "15:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "22:00",
+          "endTime": "23:00",
+          "isBooked": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Bob",
+      "type": "table_tennis",
+      "image": "https://i.ibb.co/BzwXb6J/coachtabletinnis1.png",
+      "des": "Loves table tennis and participates in table tennis competitions.",
+      "slots": [
+        {
+          "startTime": "06:00",
+          "endTime": "07:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "07:00",
+          "endTime": "08:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "08:00",
+          "endTime": "09:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "09:00",
+          "endTime": "10:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "13:00",
+          "endTime": "14:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "14:00",
+          "endTime": "15:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "22:00",
+          "endTime": "23:00",
+          "isBooked": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Eva",
+      "type": "yoga",
+      "image": "https://i.ibb.co/swwxzdp/coachyoga2.png",
+      "des": "Dedicated yogi with a daily practice.",
+      "slots": [
+        {
+          "startTime": "06:00",
+          "endTime": "07:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "07:00",
+          "endTime": "08:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "08:00",
+          "endTime": "09:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "09:00",
+          "endTime": "10:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "13:00",
+          "endTime": "14:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "14:00",
+          "endTime": "15:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "22:00",
+          "endTime": "23:00",
+          "isBooked": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Grace",
+      "type": "aerobic_dance",
+      "image": "https://i.ibb.co/ZTTNHHT/coachaerobicdance1.png",
+      "des": "Teaches aerobic dance classes at the gym.",
+      "slots": [
+        {
+          "startTime": "06:00",
+          "endTime": "07:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "07:00",
+          "endTime": "08:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "08:00",
+          "endTime": "09:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "09:00",
+          "endTime": "10:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "13:00",
+          "endTime": "14:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "14:00",
+          "endTime": "15:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "22:00",
+          "endTime": "23:00",
+          "isBooked": false
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Michael",
+      "type": "tennis",
+      "image": "https://i.ibb.co/k6563Wf/coachtennis3.png",
+      "des": "Competitive tennis player in regional tournaments.",
+      "slots": [
+        {
+          "startTime": "06:00",
+          "endTime": "07:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "07:00",
+          "endTime": "08:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "08:00",
+          "endTime": "09:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "09:00",
+          "endTime": "10:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "13:00",
+          "endTime": "14:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "14:00",
+          "endTime": "15:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "22:00",
+          "endTime": "23:00",
+          "isBooked": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Sophia",
+      "type": "table_tennis",
+      "image": "https://i.ibb.co/stJZxLR/coachtabletinnis2.png",
+      "des": "Experienced and agile table tennis player known for her dedication to the sport.",
+      "slots": [
+        {
+          "startTime": "06:00",
+          "endTime": "07:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "07:00",
+          "endTime": "08:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "08:00",
+          "endTime": "09:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "09:00",
+          "endTime": "10:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "13:00",
+          "endTime": "14:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "14:00",
+          "endTime": "15:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "22:00",
+          "endTime": "23:00",
+          "isBooked": false
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "David",
+      "type": "badminton",
+      "image": "https://i.ibb.co/T01gxBc/coachtbadminton1.png",
+      "des": "Badminton player who enjoys friendly matches.",
+      "slots": [
+        {
+          "startTime": "06:00",
+          "endTime": "07:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "07:00",
+          "endTime": "08:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "08:00",
+          "endTime": "09:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "09:00",
+          "endTime": "10:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "13:00",
+          "endTime": "14:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "14:00",
+          "endTime": "15:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "22:00",
+          "endTime": "23:00",
+          "isBooked": false
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Olivia",
+      "type": "yoga",
+      "image": "https://i.ibb.co/h1HzxdX/coachyoga1.png",
+      "des": "Certified yoga instructor and mindfulness advocate.",
+      "slots": [
+        {
+          "startTime": "06:00",
+          "endTime": "07:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "07:00",
+          "endTime": "08:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "08:00",
+          "endTime": "09:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "09:00",
+          "endTime": "10:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "13:00",
+          "endTime": "14:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "14:00",
+          "endTime": "15:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "22:00",
+          "endTime": "23:00",
+          "isBooked": false
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "William",
+      "type": "tennis",
+      "image": "https://i.ibb.co/RycxBvX/coachtennis2.png",
+      "des": "Tennis coach and former professional player.",
+      "slots": [
+        {
+          "startTime": "06:00",
+          "endTime": "07:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "07:00",
+          "endTime": "08:00",
+          "isBooked": true
+        },
+        {
+          "startTime": "08:00",
+          "endTime": "09:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "09:00",
+          "endTime": "10:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "12:00",
+          "endTime": "13:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "13:00",
+          "endTime": "14:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "14:00",
+          "endTime": "15:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "isBooked": false
+        },
+        {
+          "startTime": "22:00",
+          "endTime": "23:00",
+          "isBooked": false
+        }
+      ]
+    }
+  ]
+}]

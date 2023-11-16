@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from 'cors';
-
+import cron from 'node-cron';
+import fs from 'fs';
 import dotenv from 'dotenv';
 dotenv.config();
 const dbURI = process.env.DATABASE;
@@ -18,6 +19,8 @@ import aerobicRoute from "./routes/Aerobic.js"
 import userRoute from "./routes/User.js"
 
 import UsersRoute from './routes/Users.js'
+
+import {getDateToDay,getDateTomorrow,InsertNewSchedule} from './controllers/startSchedule.js'
 
 const app = express();
 const port = 3000;
@@ -42,6 +45,14 @@ app.use("/tabletennisCourt",tabletennisRoute);
 app.use("/aerobicCourt",aerobicRoute);
 app.use("/user",userRoute);
 
+cron.schedule('0 0 * * *', () => {
+  console.log('Running a task at midnight schedule');
+  const datetodate = getDateToDay();
+  const datetoTomo = getDateTomorrow();
+  InsertNewSchedule(datetodate);
+  InsertNewSchedule(datetoTomo);
+});
+
 app.use("/users", UsersRoute)
 
 app.get("/",async (req,res)=>{
@@ -50,6 +61,7 @@ app.get("/",async (req,res)=>{
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
+    
   });
 
 mongoose.connect(dbURI)
