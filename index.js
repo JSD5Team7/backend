@@ -45,10 +45,12 @@ app.use("/tabletennisCourt",tabletennisRoute);
 app.use("/aerobicCourt",aerobicRoute);
 app.use("/user",userRoute);
 
-cron.schedule('0 0 * * *', () => {
+cron.schedule('0 1 * * *', () => {
   console.log('Running a task at midnight schedule');
   const datetodate = getDateToDay();
+  console.log(datetodate);
   const datetoTomo = getDateTomorrow();
+  console.log(datetoTomo);
   InsertNewSchedule(datetodate);
   InsertNewSchedule(datetoTomo);
 });

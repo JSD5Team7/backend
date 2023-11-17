@@ -23,7 +23,7 @@ const coachAvaTime = async(req,res)=>{
         const _type = req.params.type;
         const _starttime = req.params.stime;
         const _date = req.params.date;
-        console.log(_type,_starttime,_date)
+        // console.log(_type,_starttime,_date)
         const data = await staffScheduleModel.aggregate([
             { $match: { date: _date } },
             { $unwind: "$staff" },
@@ -51,7 +51,7 @@ const coachWhoOther = async(req,res)=>{
         const _type = req.params.type;
         const _starttime = req.params.stime;
         const _whoid = req.params.whoid;
-        console.log(_date,_type,_starttime,_whoid);
+        // console.log(_date,_type,_starttime,_whoid);
         const data = await staffScheduleModel.aggregate([
             { $match: { date: _date } },
             { $unwind: "$staff" },
@@ -63,7 +63,7 @@ const coachWhoOther = async(req,res)=>{
             }},
             { $replaceRoot: { newRoot: "$staff" }}
         ]);
-        console.log(data);
+        // console.log(data);
         return res.status(200).json(data);
     } catch (error) {
         console.log(error)

@@ -82,7 +82,7 @@ export async function login(req, res) {
         if (user && user.isActive){
             //Check Password//
             const isMatch = await bcrypt.compare(password, user.password)
-            console.log(password)
+            // console.log(password)
             
 
             if (!isMatch) {
@@ -126,7 +126,6 @@ export async function currentUser(req, res) {
 
 export async function userUpdate(req, res) {
     const user_id = req.params._id
-    
     try {
         const { 
             img,

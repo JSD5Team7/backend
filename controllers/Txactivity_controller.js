@@ -266,9 +266,9 @@ const editTx = async(req,res)=>{
         //1.1.update old court sport
         const _tx_id = data.tx_id;
         const sport = data.type;
-        console.log(_tx_id);
+        // console.log(_tx_id);
         const old_data = await getTx(_tx_id);
-        console.log(old_data);
+        // console.log(old_data);
         updateCourtSport(sport,old_data,false)//data (old)befor edit
         //1.2.update old Coach
         updateCoach(old_data,false);
@@ -298,8 +298,8 @@ const editTx = async(req,res)=>{
             }
         };
         const doc = await txdata.findOneAndUpdate(targetDocumentId,update,{ new: true });
-        console.log("new edit");
-        console.log(doc);
+        // console.log("new edit");
+        // console.log(doc);
         const message = {
           "success":true,
           "message":"edit successfully",
